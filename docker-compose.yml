@@ -1,8 +1,15 @@
 version: '3.8'
 services:
-
+  dozzle:
+    container_name: dozzle
+    image: amir20/dozzle:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9999:8080
   db:
     image: postgres:13.3-alpine
+    container_name: stock-db
     restart: always
     command: postgres -c 'max_connections=100'
     volumes:
@@ -40,7 +47,7 @@ services:
 
   stock-api:
     image: stock-read-pub-api:latest
-    container_name: api
+    container_name: stock-api
     restart: always
     links:
       - db
@@ -49,7 +56,7 @@ services:
 
   stock-write-ticker:
     image: stock-write-ticker:latest
-    container_name: ticker
+    container_name: stock-write
     volumes:
       - log_stock_write:/etc/caddy/Caddyfile
       - log_stock_write_ticker:/logs-ticker
