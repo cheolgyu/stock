@@ -1,4 +1,4 @@
-:80 {
+highserpot.com {
     encode zstd gzip
     root * /srv/dist
     file_server browse
@@ -7,17 +7,16 @@
     log {
         format json
         output file /logs/site.log {
-        }   
+        }
     }
+
+
 }
-
-:5000 {
-    reverse_proxy stock-api:5000 
-
-    log {
-        format json
-        output file /logs/api.log {
-        }   
+ highserpot.com:5000 {
+        reverse_proxy stock-api:5000
+        log {
+                format json
+                output file /logs/api.log {
+                }
+            }
     }
-}
-

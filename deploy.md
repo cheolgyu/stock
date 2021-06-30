@@ -54,6 +54,7 @@ docker-compose version 1.29.2, build 5becea4c
 ---
 ```
 배포- site
+    append .vscode/task.json 
     업로드-site
         scp -i "./highserpot_stock.pem" -r ../stock-read-pub-site/dist ec2-user@3.37.161.89:~/stock/caddy/site
 ```
