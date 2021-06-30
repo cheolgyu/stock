@@ -36,12 +36,17 @@ docker-compose version 1.29.2, build 5becea4c
         C:\Users\cheolgyu\Desktop\backup\dumpFile
         scp -i   "highserpot_stock.pem" ./dump_2021-06-29.sql ec2-user@3.37.161.89:~/stock/dump_2021-06-29.sql
         100%  244MB   7.4MB/s
+        scp -i   "highserpot_stock.pem" ./dump_2021-06-30.sql ec2-user@3.37.161.89:~/stock/dump_2021-06-30.sql
+    
     upload container dump_file
         docker cp  ~/stock/dump_2021-06-29.sql stock-db:/var/lib/postgresql/dump_2021-06-29.sql
+        docker cp  ~/stock/dump_2021-06-30.sql stock-db:/var/lib/postgresql/dump_2021-06-30.sql
+
     container db 접속
          docker exec -it stock-db /bin/sh
          su - postgres
          psql --dbname dev  < /var/lib/postgresql/dump_2021-06-29.sql
+         psql --dbname dev  < /var/lib/postgresql/dump_2021-06-30.sql
          
     
 
@@ -104,9 +109,11 @@ docker-compose version 1.29.2, build 5becea4c
     postgres container 
     su - postgres
     pg_dump dev -n public -n company -n hist -n utils -E utf-8 > dump_2021-06-29.sql
+    pg_dump dev -t hist.bound_market -t hist.bound_stock  -E utf-8 > dump_2021-06-30.sql
 
     window 
     docker cp stock-write_db_1:/var/lib/postgresql/dump_2021-06-29.sql C://Users//cheolgyu//Desktop//backup//dumpFile//dump_2021-06-29.sql
+    docker cp stock-write_db_1:/var/lib/postgresql/dump_2021-06-30.sql C://Users//cheolgyu//Desktop//backup//dumpFile//dump_2021-06-30.sql
     
 
     ```
