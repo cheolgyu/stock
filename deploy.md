@@ -86,6 +86,7 @@ docker-compose version 1.29.2, build 5becea4c
     docker load -i  stock-read-pub-api.tar
     docker load -i  stock-write-ticker.tar
     
+    docker load -i  stock-write-ticker.tar
     docker-compose up -d
 ```
 

@@ -58,7 +58,6 @@ services:
     image: stock-write-ticker:latest
     container_name: stock-write
     volumes:
-      - log_stock_write:/etc/caddy/Caddyfile
       - log_stock_write_ticker:/logs-ticker
     links:
       - db
@@ -73,5 +72,4 @@ volumes:
   caddy_config:
   pq-data:
   log_api:
-  log_stock_write:
   log_stock_write_ticker:

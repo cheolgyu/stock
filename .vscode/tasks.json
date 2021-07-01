@@ -1,0 +1,16 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    //gin -i   -a 5001  -p 5000    run  main.go    
+    //gin  -a 5001  -p 5000    run  main.go   
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "ssh",
+            "type": "shell",
+            "command": " ssh -i highserpot_stock.pem ec2-user@3.37.161.89 ",
+        },
+        
+       
+    ]
+}
