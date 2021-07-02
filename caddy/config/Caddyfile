@@ -1,3 +1,7 @@
+:9000 {
+	metrics
+}
+
 highserpot.com {
     encode zstd gzip
     root * /srv/dist
@@ -9,9 +13,12 @@ highserpot.com {
         output file /logs/site.log {
         }
     }
-
-
 }
+
+highserpot.com:9090 {
+    reverse_proxy prometheus:9090
+}
+
  highserpot.com:5000 {
         reverse_proxy stock-api:5000
         log {

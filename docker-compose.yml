@@ -26,6 +26,17 @@ services:
     networks:
       - backend
 
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/config:/etc/prometheus
+      - prometheus-data:/prometheus
+    expose:
+      - 9090
+    networks:
+      - backend      
+
   caddy:
     image: stock-caddy:latest
     restart: unless-stopped
@@ -40,6 +51,7 @@ services:
       - 80:80
       - 443:443
       - 5000:5000
+      - 9090:9090
     networks:
       - frontend
       - backend
@@ -73,3 +85,4 @@ volumes:
   pq-data:
   log_api:
   log_stock_write_ticker:
+  prometheus-data:
