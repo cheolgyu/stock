@@ -31,6 +31,7 @@ docker-compose version 1.29.2, build 5becea4c
     docker load -i  stock-caddy-latest.tar
     docker load -i  amir20-dozzle-latest.tar
 
+    cd ../ && docker-compose up -d 
     
     upload ec2 dump_file 
         C:\Users\cheolgyu\Desktop\backup\dumpFile
@@ -109,11 +110,11 @@ docker-compose version 1.29.2, build 5becea4c
     ```
     postgres container 
     su - postgres
-    pg_dump dev -n public -n company -n hist -n utils -E utf-8 > dump_2021-06-29.sql
+    pg_dump dev -n public -n company -n hist -n utils -E utf-8 > dump_2021-07-09.sql
     pg_dump dev -t hist.bound_market -t hist.bound_stock  -E utf-8 > dump_2021-06-30.sql
 
     window 
-    docker cp stock-write_db_1:/var/lib/postgresql/dump_2021-06-29.sql C://Users//cheolgyu//Desktop//backup//dumpFile//dump_2021-06-29.sql
+    docker cp stock-write_db_1:/var/lib/postgresql/dump_2021-07-09.sql C://Users//cheolgyu//Desktop//backup//dumpFile//dump_2021-07-09.sql
     docker cp stock-write_db_1:/var/lib/postgresql/dump_2021-06-30.sql C://Users//cheolgyu//Desktop//backup//dumpFile//dump_2021-06-30.sql
     
 
