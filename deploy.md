@@ -25,6 +25,8 @@ docker-compose version 1.29.2, build 5becea4c
     scp -i "../highserpot_stock.pem" -r ./* ec2-user@3.37.161.89:~/stock/img
     
 
+    cd stock/img/
+
     docker load -i  stock-write-ticker.tar
     docker load -i  stock-read-pub-api.tar
     docker load -i  postgres-13-3-alpine.tar
