@@ -136,7 +136,8 @@ docker-compose version 1.29.2, build 5becea4c
     
 
     window 
- 
+    docker cp ./dump_2021-08-18.sql stock-write_db_1:/var/lib/postgresql/dump_2021-08-18.sql
+    psql --dbname dev  < /var/lib/postgresql/dump_2021-08-18.sql
     ```
 
 ---
