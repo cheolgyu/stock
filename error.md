@@ -8,23 +8,44 @@ public.after_closing() 오래걸림.
 월별 거래량 합계 에서 느린 경우 년도별로 거래량 미리 구해서 저장해놓기
     변하는건 마지막 2달의 거래량만 계산하기 
 
+    PERFORM from project.func_lines(); 
+        8분
+
+    project.func_monthly()
+        1분        
+
+    select 1  from public.after_closing() 
+    9분걸림 
+    hist.rebound x1으로 잡아서 그런가?
+    어디서 느린지 찾기
+        느린 sql
+            project.func_lines()
+                7~9분걸림. 
+                코드별 1분이상인 코드 체크해 봤지만 특별히 없음.
+                더 빠르게 변경할 경우 golang으로 계산해서 insert만 해야됨.
+                마지막 두개 데이터 가지고 y=mx+b 구하는기 니깐 golang으로 옴기면
+                개선될듯.
+            
+
+   
+
 ---------------------------------------------------------------------=
-060150 인선이엔티
-반등정보의 x2값이  종가가가 마지막 거래일이 아님. 시가는 마지막 거래일인데
+완료 060150 인선이엔티
+    반등정보의 x2값이  종가가가 마지막 거래일이 아님. 시가는 마지막 거래일인데
 
 
-SELECT *
-FROM 
-HIST.price 
-where 
-code_id = (select id from meta.code where code='060150')
-order by dt desc limit 10
-;
-select *
-from hist.rebound 
-where code_id = (select id from meta.code where code='060150')
-and price_type=3
-order by x1 desc 
+    SELECT *
+    FROM 
+    HIST.price 
+    where 
+    code_id = (select id from meta.code where code='060150')
+    order by dt desc limit 10
+    ;
+    select *
+    from hist.rebound 
+    where code_id = (select id from meta.code where code='060150')
+    and price_type=3
+    order by x1 desc 
 
 
 
@@ -70,8 +91,8 @@ q_last_rebound 에서 order by dt asc  안써서 그런듯 확인필요.
     3. wriitte. rebound 실행
     문제없음.
     한번더 실행해보기
-    3. 재실행 해도 문제없음.
-    4. 3. 재실행 해도 문제없음.
+    1. 재실행 해도 문제없음.
+    2. 3. 재실행 해도 문제없음.
 
 
 
