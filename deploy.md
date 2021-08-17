@@ -119,7 +119,7 @@ docker-compose version 1.29.2, build 5becea4c
     window 
     docker cp stock-write_db_1:/var/lib/postgresql/dump_2021-07-09.sql C://Users//cheolgyu//Desktop//backup//dumpFile//dump_2021-07-09.sql
     docker cp stock-write_db_1:/var/lib/postgresql/dump_2021-06-30.sql C://Users//cheolgyu//Desktop//backup//dumpFile//dump_2021-06-30.sql
-    docker cp stock-write_db_1:/var/lib/postgresql/dump_2021-06-30.sql C://Users//cheolgyu//Desktop//backup//dumpFile//dump_2021-08-18.sql
+    docker cp stock-write_db_1:/var/lib/postgresql/dump_2021-08-18-2.sql C://Users//cheolgyu//Desktop//backup//dumpFile//dump_2021-08-18.sql
     
 
     ```
