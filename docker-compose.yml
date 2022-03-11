@@ -58,7 +58,7 @@ services:
     command:  caddy run --config /etc/caddy/Caddyfile --watch
 
   stock-api:
-    image: stock-read-pub-api:latest
+    image: sf-pub-api:latest
     container_name: stock-api
     restart: always
     links:
@@ -66,9 +66,9 @@ services:
     networks:
       - backend
 
-  stock-write-ticker:
-    image: stock-write-ticker:latest
-    container_name: stock-write
+  sb-exe:
+    image: sb-exe:latest
+    container_name: sbp-inp-data
     volumes:
       - log_stock_write_ticker:/logs-ticker
     links:

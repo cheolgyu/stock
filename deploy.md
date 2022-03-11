@@ -15,8 +15,8 @@ docker-compose version 1.29.2, build 5becea4c
     scp -i   "highserpot_stock.pem" -r ./* ec2-user@3.37.161.89:~/stock/
 
     이미지 만들기. cd img
-    Docker save -o stock-write-ticker.tar stock-write-ticker:latest
-    Docker save -o stock-read-pub-api.tar stock-read-pub-api:latest
+    Docker save -o sb-exe.tar sb-exe:latest
+    Docker save -o sf-pub-api.tar sf-pub-api:latest
     Docker save -o postgres-13-3-alpine.tar postgres:13.3-alpine
     Docker save -o stock-caddy-latest.tar stock-caddy:latest
     Docker save -o amir20-dozzle-latest.tar amir20/dozzle:latest
@@ -27,8 +27,8 @@ docker-compose version 1.29.2, build 5becea4c
 
     cd stock/img/
 
-    docker load -i  stock-write-ticker.tar
-    docker load -i  stock-read-pub-api.tar
+    docker load -i  sb-exe.tar
+    docker load -i  sf-pub-api.tar
     docker load -i  postgres-13-3-alpine.tar
     docker load -i  stock-caddy-latest.tar
     docker load -i  amir20-dozzle-latest.tar
@@ -68,28 +68,28 @@ docker-compose version 1.29.2, build 5becea4c
 ```
 ```
 배포- api
-    Docker save -o stock-read-pub-api.tar stock-read-pub-api:latest
-    Docker save -o stock-write-ticker.tar stock-write-ticker:latest
+    Docker save -o sf-pub-api.tar sf-pub-api:latest
+    Docker save -o sb-exe.tar sb-exe:latest
 
-    scp -i "../highserpot_stock.pem"  ./stock-read-pub-api.tar ec2-user@3.37.161.89:~/stock/img
-    scp -i "../highserpot_stock.pem"  ./stock-write-ticker.tar ec2-user@3.37.161.89:~/stock/img
+    scp -i "../highserpot_stock.pem"  ./sf-pub-api.tar ec2-user@3.37.161.89:~/stock/img
+    scp -i "../highserpot_stock.pem"  ./sb-exe.tar ec2-user@3.37.161.89:~/stock/img
 
     
 
     docker-compose stop stock-api
-    docker-compose stop stock-write-ticker
+    docker-compose stop sb-exe
 
     
     docker-compose rm -f stock-api
-    docker-compose rm -f stock-write-ticker
+    docker-compose rm -f sb-exe
 
-    docker rmi -f stock-read-pub-api:latest
-    docker rmi -f stock-write-ticker:latest
+    docker rmi -f sf-pub-api:latest
+    docker rmi -f sb-exe:latest
 
-    docker load -i  stock-read-pub-api.tar
-    docker load -i  stock-write-ticker.tar
+    docker load -i  sf-pub-api.tar
+    docker load -i  sb-exe.tar
     
-    docker load -i  stock-write-ticker.tar
+    docker load -i  sb-exe.tar
     docker-compose up -d
 ```
 
@@ -117,9 +117,9 @@ docker-compose version 1.29.2, build 5becea4c
     pg_dump dev  -E utf-8 > dump_2021-08-18.sql
 
     window 
-    docker cp stock-write_db_1:/var/lib/postgresql/dump_2021-07-09.sql C://Users//cheolgyu//Desktop//backup//dumpFile//dump_2021-07-09.sql
-    docker cp stock-write_db_1:/var/lib/postgresql/dump_2021-06-30.sql C://Users//cheolgyu//Desktop//backup//dumpFile//dump_2021-06-30.sql
-    docker cp stock-write_db_1:/var/lib/postgresql/dump_2021-08-18-2.sql C://Users//cheolgyu//Desktop//backup//dumpFile//dump_2021-08-18.sql
+    docker cp sbp-inp-data_db_1:/var/lib/postgresql/dump_2021-07-09.sql C://Users//cheolgyu//Desktop//backup//dumpFile//dump_2021-07-09.sql
+    docker cp sbp-inp-data_db_1:/var/lib/postgresql/dump_2021-06-30.sql C://Users//cheolgyu//Desktop//backup//dumpFile//dump_2021-06-30.sql
+    docker cp sbp-inp-data_db_1:/var/lib/postgresql/dump_2021-08-18-2.sql C://Users//cheolgyu//Desktop//backup//dumpFile//dump_2021-08-18.sql
     
 
     ```
@@ -136,7 +136,7 @@ docker-compose version 1.29.2, build 5becea4c
     
 
     window 
-    docker cp ./dump_2021-08-18.sql stock-write_db_1:/var/lib/postgresql/dump_2021-08-18.sql
+    docker cp ./dump_2021-08-18.sql sbp-inp-data_db_1:/var/lib/postgresql/dump_2021-08-18.sql
     psql --dbname dev  < /var/lib/postgresql/dump_2021-08-18.sql
     ```
 
